@@ -1,0 +1,11 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% if error %}
+    <h1>Sorry, {{error}}</h1>
+{% else %}
+    <form method="post" action="login">
+        <input type="text" name="username" required>
+        <input type="text" name="password" required>
+        <input type="submit" name="登陆">
+    </form>
+{% endif %}

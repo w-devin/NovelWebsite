@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+{% block title %}index{% endblock %}
+{% block script %}
+  <script src="{{url_for('static', filename='grid.js')}}"></script>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.ui.menu .ui.dropdown').dropdown({
+        on: 'hover'
+      });
+      $('.ui.menu a.item')
+        .on('click', function() {
+          $(this)
+            .addClass('active')
+            .siblings()
+            .removeClass('active')
+          ;
+          var tab = $(this).attr('data-tab');
+          $('.ui.tab').each(function(i){
+            if($(this).attr('data-tab') == tab){
+              $(this)
+                .addClass('active')
+                .siblings()
+                .removeClass('active')
+            }
+          });
+        })
+      ;
+      $('.ui.container .ui.menu a.item')
+        .on('click', function() {
+          $(this)
+            .addClass('active')
+            .siblings()
+            .removeClass('active')
+          ;
+        })
+      ;
+    })
+  ;
+  </script>
+{% endblock %}
+{% block content %}
+  <div class="ui menu">
+    <div class="header item">阅文苑</div>
+    {% if g.user %}
+      <span class="item">{{ g.user.readerName }}</span>
+      <a class="item" href="{{ url_for('auth.logout') }}">注销</a>
+    {% else %}
+      <a class="item" href="{{ url_for('auth.register') }}">注册</a>
+      <a class="item" href="{{ url_for('auth.login') }}">登陆</a>
+    {% endif %}
+    <div tabindex="0" class="ui dropdown item">
+      作品分类
+      <i class="dropdown icon"></i>
+      <div tabindex="-1" class="menu transition hidden">
+        <div class="item active selected">科幻灵异</div>
+        <div class="item">玄幻奇幻</div>
+        <div class="item">网游竞技</div>
+        <div class="item">武侠仙侠</div>
+        <div class="item">都市言情</div>
+        <div class="item">历史军事</div>
+        <div class="item">同人小说</div>
+        <div class="item">女生频道</div>
+      </div>
+    </div>
+    <div class="right menu">
+      <div class="item">
+        <div class="ui action left icon input">
+          <i class="search icon"></i>
+          <input type="text" placeholder="查找本站图书"/>
+          <button class="ui button">搜索</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui four item stackable tabs menu">
+    <a class=" active item" data-tab="all">全部作品</a>
+    <a class="item" data-tab="order">排行榜</a>
+    <a class="item" data-tab="finished">完本</a>
+    <a class="item" data-tab="author" href="#">作家专区</a>
+  </div>
+  <div class="ui tab active" data-tab="all">
+    <div class="ui container">
+      <div class="ui ignored toggle animation checkbox">
+        <input name="animation" tabindex="0" class="hidden" type="checkbox">
+        <label>动画开关</label>
+      </div>
+      <div class="ui ignored hidden divider"></div>
+      <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+      </div>
+      <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+      </div>
+      <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+        <div class="four wide column"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ui tab" data-tab="order">
+    <div class="ui container">
+      <div class="ui top attached tabular menu">
+        <a class="active item">科幻灵异</a>
+        <a class="item">玄幻奇幻</a>
+        <a class="item">网游竞技</a>
+        <a class="item">武侠仙侠</a>
+        <a class="item">都市言情</a>
+        <a class="item">历史军事</a>
+        <a class="item">同人小说</a>
+        <a class="item">女生频道</a>
+      </div>
+      <div class="ui bottom attached segment">
+        <div class="doubling stackable three column ui grid container">
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="doubling stackable three column ui grid container">
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Author</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                    A description which may flow for several lines and give context to the content.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="https://www.qu.la/BookFiles/BookImages/moshiliulanggou.jpg">
+                </div>
+                <div class="content">
+                  <a class="header">Book Name</a>
+                  <div class="meta">
+                    <a>Author</a>
+                  </div>
+                  <div class="description">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui tab" data-tab="finished">
+    <div class="ui container">
+      完本
+    </div>
+  </div>
+{% endblock %}
+
+
+
