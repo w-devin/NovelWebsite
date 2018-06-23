@@ -1,10 +1,12 @@
 from werkzeug.wsgi import DispatcherMiddleware
 from werkzeug.serving import run_simple
-from flask import Flask, request, render_template, url_for, abort, session
+from flask import \
+    ( Flask, request, render_template, url_for, session, jsonify)
 from admin.admin import app as app_admin
 from author.author import app as app_author
 from reader.reader import app as app_reader
 from auth import bp
+from utils.db_utils import select_book
 
 
 app_home = Flask(__name__)
@@ -18,10 +20,12 @@ def index():
         return render_template("index.html")
 
 
-@app_home.route('/test', methods=['GET'])
-def test():
-    if request.method == 'GET':
-        return render_template("demo.html")
+@app_home.route('/book/<mark>', methods=['GET'])
+def book(mark):
+    # ("科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道")
+    res = select_book(mark)
+    return jsonify({"res": res})
+
 
 
 with app_home.test_request_context():

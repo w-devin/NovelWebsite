@@ -8,13 +8,23 @@ semantic.grid = {};
 // ready event
 semantic.grid.ready = function() {
 
-  $('.animation.checkbox')
+  $('#all_checkbox.animation.checkbox')
     .checkbox({
       onChecked: function() {
-        $('body').addClass('animated');
+        $('#example').addClass('animated');
       },
       onUnchecked: function() {
-        $('body').removeClass('animated');
+        $('#example').removeClass('animated');
+      }
+    })
+  ;
+  $('#finished_checkbox.animation.checkbox')
+    .checkbox({
+      onChecked: function() {
+        $('#finished').addClass('animated');
+      },
+      onUnchecked: function() {
+        $('#finished').removeClass('animated');
       }
     })
   ;
