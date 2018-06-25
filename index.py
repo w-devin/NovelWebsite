@@ -26,8 +26,6 @@ def book(mark):
     res = select_book(mark)
     return jsonify({"res": res})
 
-
-
 with app_home.test_request_context():
     # print(url_for('static', filename='style.css'))
     pass
