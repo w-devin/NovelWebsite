@@ -4,7 +4,6 @@ from flask import \
     ( Flask, request, render_template, url_for, session, jsonify)
 from admin.admin import app as app_admin
 from author.author import app as app_author
-from reader.reader import app as app_reader
 from auth import bp
 from utils.db_utils import select_book
 
@@ -38,7 +37,6 @@ with app_home.test_request_context():
 app = DispatcherMiddleware(app_home,{
     '/admin': app_admin,
     '/author': app_author,
-    '/reader': app_reader,
 })
 
 
