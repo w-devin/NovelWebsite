@@ -12,6 +12,7 @@ from utils.db_utils import select_book
 app_home = Flask(__name__)
 app_home.secret_key = '123456'
 app_home.register_blueprint(bp)
+app_home.config['JSON_AS_ASCII'] = False
 
 
 @app_home.route('/', methods=['GET'])

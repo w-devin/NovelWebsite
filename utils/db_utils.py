@@ -42,9 +42,9 @@ def select_book(mark, page=None):
     if not page:
         page = 1
     if mark == "all":
-        return [json.dumps({'name': b.bookName, 'author': b.author, 'description': b.bookDescription, 'link': b.link}) for b in Book.select(orderBy='heat')[(page-1)*12: page*12]]
+        return [json.dumps({'name': b.bookName, 'author': b.author, 'description': b.bookDescription, 'link': b.link, 'cover': b.cover}) for b in Book.select(orderBy='heat')[(page-1)*12: page*12]]
     elif mark == "finished":
-        select_sql = Select(["bookName", "author", "bookDescription", "link"], staticTables=['Book'],
+        select_sql = Select(["author", "bookName", "", "bookDescription", "link", "cover"], staticTables=['Book'],
                             where="currentState = '%s'" % ('完成'), orderBy="heat")
         query = connection.sqlrepr(select_sql)
         rows = connection.queryAll(query)[(page-1)*12: page*12]
@@ -54,7 +54,7 @@ def select_book(mark, page=None):
         if mark in [range(1, 9)]:
             catalog = ("科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道")
             catalog_index = int(mark)
-            select_sql = Select(["bookName", "author", "bookDescription", "link"], staticTables=['Book'],
+            select_sql = Select(["bookName", "author", "bookDescription", "link", "cover"], staticTables=['Book'],
                                 where="catalog = '%s'" % (catalog(catalog_index)), orderBy="heat")
             query = connection.sqlrepr(select_sql)
             rows = connection.queryAll(query)[(page-1)*12: page*12]

@@ -220,6 +220,10 @@
   animation: none;
 }
 
+/* Dropdown */
+.ui .dropdown{
+    z-index: 9999;
+}
 
 
 
