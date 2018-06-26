@@ -24,12 +24,16 @@ def valid_admin_login(username, password):
 
 
 # 注册作者
-def valid_author_login(username, password):
+def valid_author_regist(username, password):
+    print(username,password)
     select_sql = Select(["author_name", "author_pass"], staticTables=['Author'], where="author_name = '%s'" %(username))
     query = connection.sqlrepr(select_sql)
     rows = connection.queryAll(query)
     if rows:
         return False
+    insert_sql = Insert('Author',values={'author_name':username,'author_pass':password})
+    query = connection.sqlrepr(insert_sql)
+    connection.query(query)
     return True
 
 

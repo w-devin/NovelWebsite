@@ -26,8 +26,6 @@ def book(mark):
     res = select_book(mark)
     return jsonify({"res": res})
 
-
-
 with app_home.test_request_context():
     # print(url_for('static', filename='style.css'))
     pass
@@ -45,3 +43,6 @@ if __name__ == '__main__':
                use_reloader=True, use_debugger=True, use_evalex=True)
 
 
+'''
+YUEBIN WOSHI NI BABA
+'''

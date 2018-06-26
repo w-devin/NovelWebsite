@@ -38,6 +38,9 @@ class Reader(SQLObject):
         fromDatabase = True
 
 
+#def create_book():
+
+
 def select_book(mark, page=None):
     if not page:
         page = 1
