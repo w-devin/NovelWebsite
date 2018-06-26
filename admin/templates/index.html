@@ -1,17 +1,11 @@
-{% extends 'base.html' %}
 
-<head>
-<title>Hello from Flask</title>
-</head>
-<body>
-<div class="ui container">
-    {% if admin %}
-    <h1>Hello {{ admin }}!</h1>
-    {% else %}
-    <h1>Hello, World!</h1>
-    {% endif %}
- {% block content %}
-  <div>
+{% extends 'base.html' %}
+{% block title %}Hello from Flask{% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='mybook.js')}}"></script>
+{% endblock %}
+{% block content %}
+ <div>
   <h3>管理员控制台</h3>
 <a href="{{ url_for('book.book') }}">小说管理</a>
 <a href="{{ url_for('author.author') }}">作者管理</a>
@@ -22,7 +16,7 @@
   <hr/>
   <hr/>
   <div>小说列表</div>
-  <div>
+  <div id="book_select_admin">
     <table class="ui celled table" style="text-align:center">
       <thead>
         <tr><th>编号</th>
@@ -34,38 +28,10 @@
            <th>审核</th>
       </tr></thead>
       <tbody>
-        <tr>
-          <td>
-            First
-          </td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-        </tr>
-        <tr>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-        </tr>
-        <tr>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-        </tr>
+
       </tbody>
       <tfoot>
-        <tr><th colspan="3">
+        <tr><th colspan="7">
           <div class="ui right floated pagination menu">
             <a class="icon item">
               <i class="left chevron icon"></i>
@@ -82,7 +48,5 @@
       </tr></tfoot>
     </table>
   </div>
- {% endblock %}
+{% endblock %}
 
-</div>
-</body>
