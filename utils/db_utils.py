@@ -39,7 +39,11 @@ class Reader(SQLObject):
 
 
 #def create_book():
-
+def select_HX(mark,page=None):
+    if not page:
+        page = 1;
+    if mark == "book":
+        return
 
 def select_book(mark, page=None):
     if not page:

@@ -21,6 +21,26 @@ def home():
     return render_template('login.html')
 
 
+@app.route('/book')
+def book():
+    return render_template('book_manager.html')
+
+
+@app.route('/author')
+def author():
+    return render_template('author_manager.html')
+
+
+@app.route('/reader')
+def reader():
+    return render_template('reader_manager.html')
+
+
+@app.route('/check')
+def check():
+    return render_template('check_manager.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None

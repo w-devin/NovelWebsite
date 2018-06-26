@@ -4,9 +4,11 @@
     <h1>Sorry, {{error}}</h1>
 {% else %}
     <form method="post" action="login">
-        <h3>test</h3>
-        <input type="text" name="username" required>
-        <input type="text" name="password" required>
+        <h3>管理员登录</h3>
+        用户名：<input type="text" name="username" required>
+        <br/>
+         密码： <input type="text" name="password" required>
+        <br>
         <input type="submit" name="登陆">
     </form>
 {% endif %}
