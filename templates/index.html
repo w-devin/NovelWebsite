@@ -2,6 +2,7 @@
 {% block title %}index{% endblock %}
 {% block script %}
   <link rel="stylesheet" href="{{url_for('static', filename='doc.css')}}"/>
+  <script src="{{url_for('static', filename='util.js')}}"></script>
   <script src="{{url_for('static', filename='grid.js')}}"></script>
   <script src="{{url_for('static', filename='action.js')}}"></script>
   <script src="{{url_for('static', filename='book.js')}}"></script>
@@ -34,8 +35,8 @@
       <div class="item">
         <div class="ui action left icon input">
           <i class="search icon"></i>
-          <input type="text" placeholder="查找本站图书"/>
-          <button class="ui button">搜索</button>
+          <input type="text" id="key" placeholder="查找本站图书" required/>
+          <button id="search" class="ui button">搜索</button>
         </div>
       </div>
     </div>

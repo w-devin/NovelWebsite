@@ -1,11 +1,11 @@
 from werkzeug.wsgi import DispatcherMiddleware
 from werkzeug.serving import run_simple
 from flask import \
-    ( Flask, request, render_template, url_for, session, jsonify)
+    ( Flask, request, render_template, url_for, session, jsonify, redirect)
 from admin.admin import app as app_admin
 from author.author import app as app_author
 from auth import bp
-from utils.db_utils import select_book
+from utils.db_utils import select_book, search_book
 
 
 app_home = Flask(__name__)
@@ -32,6 +32,20 @@ def book_order(catagory):
     res = select_book('order', catagory=catagory)
     return jsonify({"res": res})
 
+
+@app_home.route('/search', methods=['POST'])
+def search():
+    if request.method == 'POST':
+        keyword = request.form['key']
+        if keyword:
+            return redirect('result/%s'%keyword)
+
+
+@app_home.route('/result/<keyword>')
+def search_result(keyword):
+    rows = search_book(keyword)
+    print(rows)
+    return render_template('search.html', books = rows)
 
 
 with app_home.test_request_context():
