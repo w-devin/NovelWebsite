@@ -22,9 +22,17 @@ def index():
 
 @app_home.route('/book/<mark>', methods=['GET'])
 def book(mark):
-    # ("科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道")
     res = select_book(mark)
     return jsonify({"res": res})
+
+
+@app_home.route('/book/order/<int:catagory>', methods=['GET'])
+def book_order(catagory):
+    # ("科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道")
+    res = select_book('order', catagory=catagory)
+    return jsonify({"res": res})
+
+
 
 with app_home.test_request_context():
     # print(url_for('static', filename='style.css'))
@@ -43,6 +51,3 @@ if __name__ == '__main__':
                use_reloader=True, use_debugger=True, use_evalex=True)
 
 
-'''
-YUEBIN WOSHI NI BABA
-'''
