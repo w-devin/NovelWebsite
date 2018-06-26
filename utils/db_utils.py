@@ -40,6 +40,7 @@ class Reader(SQLObject):
 
 #def create_book():
 
+
 def select_book(mark, page=None):
     if not page:
         page = 1
