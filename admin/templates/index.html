@@ -13,10 +13,11 @@
  {% block content %}
   <div>
   <h3>管理员控制台</h3>
-  <a href="{{ url_for('book') }}">小说管理</a>
-  <a href="{{ url_for('author') }}">作者管理</a>
-  <a href="{{ url_for('reader') }}">读者管理</a>
-  <a href="{{ url_for('check') }}">审核管理</a>
+<a href="{{ url_for('book.book') }}">小说管理</a>
+<a href="{{ url_for('author.author') }}">作者管理</a>
+<a href="{{ url_for('reader.reader') }}">读者管理</a>
+<a href="{{ url_for('check.check') }}">审核管理</a>
+
   </div>
   <hr/>
   <hr/>
@@ -27,9 +28,10 @@
         <tr><th>编号</th>
         <th>书名</th>
         <th>作者名</th>
+          <th>类别</th>
         <th>状态</th>
-        <th>审核</th>
         <th>更新时间</th>
+           <th>审核</th>
       </tr></thead>
       <tbody>
         <tr>
@@ -41,16 +43,19 @@
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
-        </tr>
-        <tr>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
           <td>Cell</td>
         </tr>
         <tr>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+        <tr>
+          <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>

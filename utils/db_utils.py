@@ -43,7 +43,15 @@ def select_HX(mark,page=None):
     if not page:
         page = 1;
     if mark == "book":
-        return
+        select_sql= Select(["id","book_name","author","catalog","current_state","recent_update_time","check"],staticTables=['Book'],
+                           orderBy="heat")
+        query = connection.sqlrepr(select_sql)
+        rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+        print(rows)
+        return [json.dumps({'id': r[0], 'bookname':r[1],'author': r[2],'catalog':r[3], 'current_state': r[4],
+                            'recent_update_time': r[5], 'check': r[6]})
+                for r in rows]
+
 
 def select_book(mark, page=None):
     if not page:

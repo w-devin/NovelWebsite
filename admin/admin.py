@@ -5,40 +5,41 @@
 # @Site: 
 # @File: admin.py
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, url_for, redirect
 from utils.login_utils import valid_admin_login
+from admin.auth import bp as auth_bp
+from admin.book import bp as book_bp
+from admin.author import bp as author_bp
+from admin.reader import bp as reader_bp
+from admin.check import bp as check_bp
+from utils.db_utils import select_HX
 
 app = Flask(__name__)
+app.secret_key = '123456'
+app.register_blueprint(auth_bp)
+app.register_blueprint(book_bp)
+app.register_blueprint(author_bp)
+app.register_blueprint(reader_bp)
+app.register_blueprint(check_bp)
 
 
-@app.route('/<admin_name>')
-def index(admin_name):
-    return render_template('index.html', admin=admin_name)
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/')
 def home():
-    return render_template('login.html')
+    if session.get('admin_id') is None:
+        return redirect(url_for('auth.login'))
+    return render_template('index.html')
 
 
-@app.route('/book')
-def book():
-    return render_template('book_manager.html')
+@app.route('/select/<mark>')
+def book(mark):
+    res=select_HX(mark)
+    return jsonify({"res": res})
 
-
-@app.route('/author')
-def author():
-    return render_template('author_manager.html')
-
-
-@app.route('/reader')
-def reader():
-    return render_template('reader_manager.html')
-
-
-@app.route('/check')
-def check():
-    return render_template('check_manager.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
