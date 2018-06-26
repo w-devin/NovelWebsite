@@ -70,9 +70,9 @@
         })
       ;
 
-      $.get('select/book', function(data){
+      $.get('/admin/select/book', function(data){
         var res = data.res;
-        $('#book_select div.ui.segment div.item')
+        $('#book_select_admin div.ui.segment div.item')
             .each(function(i){
                 var info = JSON.parse(res[i]);
                 var _this = $(this);

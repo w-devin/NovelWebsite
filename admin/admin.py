@@ -35,7 +35,7 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/select/<mark>')
+@app.route('/admin/select/<mark>')
 def book(mark):
     res=select_HX(mark)
     return jsonify({"res": res})
