@@ -47,11 +47,15 @@
     <a class="item" data-tab="finished">完本</a>
     <a class="item" data-tab="author" href="author/auth/login">作家专区</a>
   </div>
+  <div class="ui center aligned container">
+    <div class="ui button" id="last_page" data="1">上一页</div>
+    <div class="ui left labeled input">
+      <input type="number" placeholder="跳转到" value="1" id="page_num"/>
+    </div>
+    <div class="ui button" id="redirect_page" data="all">跳转</div>
+    <div class="ui button" id="next_page" data="1">下一页</div>
+  </div>
   <div class="ui tab active" id="example" data-tab="all">
-      <div class="ui container">
-        <div class="ui button"><i class="arrow left"></i></div>
-        <div class="ui button"><i class="arrow right"></i></div>
-      </div>
     <div class="ui container highlighted example" id="all_book">
       <div class="ui ignored toggle animation checkbox checked" id="all_checkbox">
         <input name="animation" tabindex="0" class="hidden" type="checkbox">

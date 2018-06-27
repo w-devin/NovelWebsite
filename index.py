@@ -22,7 +22,7 @@ def index():
 
 @app_home.route('/book/<mark>/<int:page>', methods=['GET'])
 def book(mark, page):
-    res = select_book(mark, page)
+    res = select_book(mark, page=page)
     return jsonify({"res": res})
 
 

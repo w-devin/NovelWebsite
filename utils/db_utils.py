@@ -38,6 +38,11 @@ class Reader(SQLObject):
         fromDatabase = True
 
 
+book_num = Book.select().count()
+author_num = Author.select().count()
+admin_num = Admin.select().count()
+reader_num = Reader.select().count()
+
 def select_HX(mark,page=None):
     if not page:
         page = 1;
@@ -45,7 +50,6 @@ def select_HX(mark,page=None):
         select_sql= Select(["id","book_name","author","catalog","current_state","recent_update_time","check_state"],staticTables=['Book'],
                            orderBy="heat", limit=12)
         query = connection.sqlrepr(select_sql)
-        print(query)
         rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
         print(rows)
         return [json.dumps({'id': r[0], 'bookname':r[1],'author': r[2],'catalog':r[3], 'current_state': r[4],

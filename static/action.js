@@ -16,6 +16,13 @@
             .removeClass('active')
           ;
           var tab = $(this).attr('data-tab');
+          console.log(tab);
+          if(tab == 'all'){
+            $('#redirect_page').attr('data', 'all');
+          }else if(tab == "finished"){
+            $('#redirect_page').attr('data', 'finished');
+          }else{
+          }
           $('.ui.tab').each(function(i){
             if($(this).attr('data-tab') == tab){
               $(this)

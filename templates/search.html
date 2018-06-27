@@ -1,17 +1,50 @@
 {% extends 'base.html' %}
 {% block title %}search{% endblock %}
 {% block script %}
+<script src="{{url_for('static', filename='book.js')}}"></script>
 {% endblock %}
 {% block content %}
-<ul>
+<div class="ui center aligned container">
+
+    <div class="ui action left icon input">
+        <i class="search icon"></i>
+        <input type="text" id="key" placeholder="查找本站图书" required/>
+        <button id="search" class="ui button">搜索</button>
+    </div>
+
+    <div class="ui horizontal divider">搜索结果</div>
+
+    <div class="doubling stackable four column ui grid container">
     {% if books%}
         {% for book in books%}
-        <li>{{book['name']}}</li>
+        <div class="column">
+            <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="{{ book['cover']}}">
+                </div>
+                <div class="content">
+                  <a class="header">{{ book['name']}}</a>
+                  <div class="meta">
+                    <a>{{ book['author']}}</a>
+                  </div>
+                  <div class="description">
+                    {{ book['description'][:20]}}......
+                  </div>
+                  <div class="ui button">
+                    <a href="{{ book['link']}}">点击阅读</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
         {% endfor%}
     {%else%}
-        <li>没有结果</li>
+        <div class="column">没有结果</div>
     {% endif%}
-</ul>
+    </div>
+    <div class="ui horizontal divider">到底了</div>
+</div>
 {% endblock %}
 
 
