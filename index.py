@@ -5,7 +5,7 @@ from flask import \
 from admin.admin import app as app_admin
 from author.author import app as app_author
 from auth import bp
-from utils.db_utils import select_book, search_book
+from utils.db_utils import select_book, search_book, select_book_byclass
 
 
 app_home = Flask(__name__)
@@ -33,19 +33,19 @@ def book_order(catagory):
     return jsonify({"res": res})
 
 
-@app_home.route('/search', methods=['POST'])
+@app_home.route('/book/catagory/<int:catagory>/<int:page>', methods=['GET'])
+def book_class(catagory, page):
+    res = select_book_byclass(class_=catagory, page=page)
+    return jsonify({"res": res})
+
+
+@app_home.route('/search', methods=['GET'])
 def search():
-    if request.method == 'POST':
-        keyword = request.form['key']
-        if keyword:
-            return redirect('result/%s'%keyword)
-
-
-@app_home.route('/result/<keyword>')
-def search_result(keyword):
-    rows = search_book(keyword)
-    print(rows)
-    return render_template('search.html', books = rows)
+    keyword = request.args.get('keyword')
+    if keyword:
+        rows = search_book(keyword)
+        return render_template('search.html', books=rows)
+    return render_template("index.html")
 
 
 with app_home.test_request_context():

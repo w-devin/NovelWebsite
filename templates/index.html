@@ -20,7 +20,7 @@
     <div tabindex="0" class="ui dropdown item">
       作品分类
       <i class="dropdown icon"></i>
-      <div tabindex="-1" class="menu transition hidden">
+      <div tabindex="-1" class="menu transition hidden" id="catagory_menu">
         <div class="item active selected">科幻灵异</div>
         <div class="item">玄幻奇幻</div>
         <div class="item">网游竞技</div>
@@ -42,10 +42,10 @@
     </div>
   </div>
   <div class="ui four item stackable tabs menu">
-    <a class=" active item" data-tab="all">全部作品</a>
+    <a class=" active item" data-tab="all" id="all_index">全部作品</a>
     <a class="item" data-tab="order">排行榜</a>
     <a class="item" data-tab="finished">完本</a>
-    <a class="item" data-tab="author" href="author/login">作家专区</a>
+    <a class="item" data-tab="author" href="author/auth/login">作家专区</a>
   </div>
   <div class="ui tab active" id="example" data-tab="all">
     <div class="ui container highlighted example" id="all_book">

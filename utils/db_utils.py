@@ -53,6 +53,22 @@ def select_HX(mark,page=None):
                 for r in rows]
 
 
+def select_book_byclass(class_, page=None):
+    if page is None:
+        page = 1
+    if class_ in list(range(9)):
+        if class_ != 8:
+            catalog = ["科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道"]
+            select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
+                            where="catalog = '%s'" % (catalog[class_]), orderBy="heat", limit=12, start=(page-1)*12)
+        else:
+            select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'], orderBy="heat")
+        query = connection.sqlrepr(select_sql)
+        rows = connection.queryAll(query)
+    return [{'name': r[1], 'author': r[0], 'description': r[2], 'link': r[3], 'cover': r[4]}
+        for r in rows]
+
+
 def select_book(mark, catagory=None , page=None):
     if not page:
         page = 1
@@ -60,9 +76,9 @@ def select_book(mark, catagory=None , page=None):
         return [json.dumps({'name': b.bookName, 'author': b.author, 'description': b.bookDescription, 'link': b.link, 'cover': b.cover}) for b in Book.select(orderBy='heat')[(page-1)*12: page*12]]
     elif mark == "finished":
         select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
-                            where="current_state = '%s'" % ('完成'), orderBy="heat", )
+                            where="current_state = '%s'" % ('完成'), orderBy="heat", limit=12, start=(page-1)*12)
         query = connection.sqlrepr(select_sql)
-        rows = connection.queryAll(query)[(page-1)*12: page*12]
+        rows = connection.queryAll(query)
         return [json.dumps({'name': r[1], 'author': r[0], 'description': r[2], 'link': r[3], 'cover': r[4]})
                 for r in rows]
     else:
@@ -70,10 +86,9 @@ def select_book(mark, catagory=None , page=None):
             if catagory in list(range(1, 9)):
                 catalog = ["科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道"]
                 select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
-                                    where="catalog = '%s'" % (catalog[catagory]), orderBy="heat")
+                                    where="catalog = '%s'" % (catalog[catagory]), orderBy="heat", limit=12, start=(page-1)*12)
                 query = connection.sqlrepr(select_sql)
-                print(query)
-                rows = connection.queryAll(query)[(page-1)*12: page*12]
+                rows = connection.queryAll(query)
                 return [json.dumps({'name': r[1], 'author': r[0], 'description': r[2], 'link': r[3], 'cover': r[4]})
                         for r in rows]
             return None

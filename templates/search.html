@@ -6,7 +6,7 @@
 <ul>
     {% if books%}
         {% for book in books%}
-        <li>book['name']</li>
+        <li>{{book['name']}}</li>
         {% endfor%}
     {%else%}
         <li>没有结果</li>
