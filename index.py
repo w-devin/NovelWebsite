@@ -4,13 +4,13 @@ from flask import \
     ( Flask, request, render_template, url_for, session, jsonify, redirect)
 from admin.admin import app as app_admin
 from author.author import app as app_author
-from auth import bp
+from reader.reader import app as app_reader
+
 from utils.db_utils import select_book, search_book, select_book_byclass
 
 
 app_home = Flask(__name__)
 app_home.secret_key = '123456'
-app_home.register_blueprint(bp)
 app_home.config['JSON_AS_ASCII'] = False
 
 
@@ -57,6 +57,7 @@ with app_home.test_request_context():
 app = DispatcherMiddleware(app_home,{
     '/admin': app_admin,
     '/author': app_author,
+    '/reader': app_reader,
 })
 
 
