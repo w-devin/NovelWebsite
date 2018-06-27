@@ -20,9 +20,9 @@ def index():
         return render_template("index.html")
 
 
-@app_home.route('/book/<mark>', methods=['GET'])
-def book(mark):
-    res = select_book(mark)
+@app_home.route('/book/<mark>/<int:page>', methods=['GET'])
+def book(mark, page):
+    res = select_book(mark, page)
     return jsonify({"res": res})
 
 

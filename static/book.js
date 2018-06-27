@@ -42,7 +42,7 @@
       });
 
       /*获取所有图书的信息并进行渲染*/
-      $.get('book/all', function(data){
+      $.get('book/all/1', function(data){
         var res = data.res;
         $('#all_book div.ui.segment div.item')
             .each(function(i){
@@ -109,7 +109,7 @@
       ;
 
       /*获取完本图书的信息并进行渲染*/
-      $.get('book/finished', function(data){
+      $.get('book/finished/1', function(data){
         var res = data.res;
         $('#finished_book div.ui.segment div.item')
             .each(function(i){
