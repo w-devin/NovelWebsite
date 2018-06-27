@@ -1,3 +1,0 @@
-flask
-sqlobject
-mysql-connector
