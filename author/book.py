@@ -1,10 +1,13 @@
 import functools
+import requests
+import os
+from bs4 import BeautifulSoup
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
 )
 
-from utils.db_utils import Admin, Author, Reader,create_book,Book,update_link,show_books,author_select_book,update_bookmes
+from utils.db_utils import Admin, Author, Reader,create_book,Book,update_link,show_books,author_select_book,update_bookmes,select_link
 
 bp = Blueprint('book', __name__, url_prefix='/book')
 
@@ -32,9 +35,24 @@ def addchapter():
 @bp.route('/addChapter', methods=('GET', 'POST'))
 def addChapter():
     if request.method == 'POST':
-        id = int(request.form['bookid'])
-        print(request.form['title'])
-        print(request.form['text'])
+        title = request.form['title']
+        content = request.form['text']
+        row = select_link(int(request.form['bookid']))[0]
+        link = row[-1]
+        print(link)
+        if os.path.exists('static%s.txt' % link):
+            with open('static%s.txt' % link, 'r', encoding='utf8') as f:
+                length = len(f.readlines()) + 1
+            with open('static%s.txt' % link, 'a', encoding='utf8') as f:
+                f.write(",".join(["%s/%s.html" % (link, length), '第%s章 %s' % (length, title)]) + '\n')
+            with open('static/chapter/%s.html' % length, 'a', encoding='utf8') as f:
+                f.write(",".join(["%s" % title + '\n' + '%s' % content]))
+        if not os.path.exists('static%s.txt' % link):
+            with open('static%s.txt' % link, 'w', encoding='utf8') as f:
+                    f.write(",".join(["%s/1.html" % link, '第1章 %s' % title ])+'\n')
+            with open('static/chapter/1.html', 'w', encoding='utf8') as f:
+                f.write(",".join(["%s" % title+'\n'+ '%s' % content]))
+
         return jsonify({"code": 200, "result": '添加成功'})
 
 
@@ -50,9 +68,9 @@ def createbook():
                 error = 'incomplete information'
             else:
                 book = Book.selectBy(bookName=request.form['bookname'], author=session.get('author_name'))[0]
-                link = '/book/' + str(book.id) + '/'
+                link = '/book/' + str(book.id)
                 update_link(link, book.id)
-                return jsonify({"code": 200, "result": '修改成功'})
+                return jsonify({"code": 200, "result": '添加成功'})
             flash(error)
         error = 'bookname is repeat'
         return redirect(url_for('book.createbook'))
