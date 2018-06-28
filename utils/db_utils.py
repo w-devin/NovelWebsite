@@ -76,7 +76,6 @@ def author_select_book(bookid):
                         where="id = '%d'" % (bookid))
     query = connection.sqlrepr(select_sql)
     rows = connection.queryAll(query)
-    print(rows)
     return rows
 
 
