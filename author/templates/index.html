@@ -42,14 +42,14 @@
     <img class="image" src="{{url_for('static', filename='elliot.jpg')}}">
   </div>
   <div class="content">
-    <a class="header">空调不凉</a>
-   <div class="meta">主要小说我叫岳斌</div>
-    <div class="description">空调不凉在本网站有三本小说</div>
+    <a class="header">{{session.get('author_name')}}</a>
+   <div class="meta">代表小说《{{session.get('main_book')[0][1]}}》</div>
+    <div class="description">{{session.get('author_name')}}共有{{session.get('number')}}本小说</div>
   </div>
   <div class="extra content">
     <div class="ui two buttons">
       <div class="ui basic green button"><a href="#tips">添加小说</a></div>
-        <div class="ui basic red button">其他</div>
+        <div class="ui basic red button"><a href="book.">查看小说</a> </div>
       </div>
   </div>
    <div class="ui horizontal divider"> </div>
@@ -57,19 +57,19 @@
  </center>
 </div>
 <a id="tips"></a>
-<div class="ui form">
+<div class="ui form" id="id">
   <br/>
   <h4 class="ui dividing header">添加小说信息</h4>
   <br/>
   <div class="field">
       <label>Book Name</label>
-      <input type="text" placeholder="Book Name" value="">
+      <input type="text" placeholder="Book Name" id="bookname">
   </div>
 
   <div class="ui form">
     <div class="field">
        <label>选择小说类型</label>
-       <select class="ui search dropdown">
+       <select class="ui search dropdown" id="catalog">
          <option value="">科幻灵异</option>
          <option value="2">玄幻奇幻</option>
          <option value="3">网游竞技</option>
@@ -85,15 +85,33 @@
   <div class="ui form">
     <div class="field">
       <label>小说简介</label>
-      <textarea></textarea>
+      <textarea id="bookdescription"></textarea>
     </div>
   </div>
 </div>
-<button class="ui primary button">Save</button>
+<button type="submit" class="ui primary button" onclick="subText()">Save</button>
 <a href="#" onclick="showPopup(300,200);">Open popup</a>
-
 <div id="popupcontent"> SSSS</div>
+<script type="text/javascript">
+    methods:
+        function subText()
+        {
+            var select = document.getElementById('catalog');
+            var index = select.selectedIndex;
+            var data = {
+            "bookname":$('#bookname').val(),
+            "bookdescription":$('#bookdescription').val(),
+            "catalog":select.options[index].text
+            };
+            $.ajax({
+            url:'book/createbook',
+            type:'POST',
+            data:data,
+            dataType:'json'
+            });
 
+        }
+    </script>
 {% else %}
 <a class="item" href="{{ url_for('auth.register') }}">注册</a>
 <a class="item" href="{{ url_for('auth.login') }}">登陆</a>
