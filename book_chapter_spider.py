@@ -22,5 +22,7 @@ def get_chapter_content(url):
     res = requests.get(url)
     content = res.content
     soup = BeautifulSoup(content, 'lxml')
-    chapter_content =soup.find('div', attrs={"id": "chaptercontent"})
-    return chapter_content
+    title = soup.find('span', attrs={"class": "title"}).text
+    chapter_content = soup.find('div', attrs={"id": "chaptercontent"}).text.replace('『章节错误,点此举报』', '')
+    chapter_content = chapter_content.replace('　　　　', '<br>')
+    return chapter_content, title

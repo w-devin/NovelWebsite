@@ -11,19 +11,35 @@
         <button id="search" class="ui button">搜索</button>
     </div>
     </div>
-<div class="ui left aligned container">
-    <div class="ui horizontal divider">小说页面</div>
+<div class="ui center aligned container">
+    <div class="ui horizontal divider">小说详情</div>
     <div class="ui center aligned container">
-        <div class="ui segment">
-
-        </div>
+          <div class="ui segment">
+              <div class="item">
+                <div class="ui small image">
+                  <img src="{{book.cover}}">
+                </div>
+                <div class="content">
+                  <a class="header">书名:{{book.bookName}}</a>
+                  <div class="meta">
+                    <a>作者:{{book.author}}</a>
+                  </div>
+                  <div class="description">
+                    介绍: {{book.bookDescription}}
+                  </div>
+                </div>
+              </div>
+          </div>
     </div>
+    <div class="ui horizontal divider">章节信息</div>
     <div class="doubling">
     {% if chapters%}
         <div class="ul list">
         {% for chapter in chapters%}
+            <div class="ui left aligned container">
             <div class="ui floating message">
                 <a href="/read{{chapter[0].split('.')[0]}}">{{chapter[1]}}</a>
+            </div>
             </div>
         {% endfor%}
         </div>
