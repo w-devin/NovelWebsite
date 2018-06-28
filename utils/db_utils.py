@@ -43,6 +43,40 @@ author_num = Author.select().count()
 admin_num = Admin.select().count()
 reader_num = Reader.select().count()
 
+
+def create_book(ins):
+    if ins is None:
+        return False
+    else:
+        insert_sql = Insert('Book', values={'book_name': ins[0], 'book_description': ins[1],
+                                               'catalog': ins[2], 'author': ins[3], 'link':ins[4],'author_id':ins[5]})
+        query = connection.sqlrepr(insert_sql)
+        connection.query(query)
+        return True
+
+def update_link(link,id):
+    update_sql = Update('Book',values={'link':link,'current_state':'连载'},where='id=%d'%(id))
+    query = connection.sqlrepr(update_sql)
+    connection.query(query)
+
+def show_books(authorid):
+    select_sql = Select(["id", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
+                        where="author_id = '%d'" % (authorid))
+    query = connection.sqlrepr(select_sql)
+    rows = connection.queryAll(query)
+    print(rows)
+    return rows
+
+def author_select_book(bookid):
+    select_sql = Select(["book_name", "book_description", "catalog", "current_state","id"], staticTables=['Book'],
+                        where="id = '%d'" % (bookid))
+    query = connection.sqlrepr(select_sql)
+    rows = connection.queryAll(query)
+    print(rows)
+    return rows
+
+
+
 def select_HX(mark,page=None):
     if not page:
         page = 1;
