@@ -149,19 +149,22 @@ def delete_HX(mark,id=None):
 def update_HX(mark,id,message):
     if mark =="book":
         update_sql = Update('Book',
-                            values={'catalog': message[0], 'current_state': message[1], 'check_state': message[2]}, where='id = %d' % (id))
+                            values={'catalog': message[0], 'current_state': message[1], 'check_state': message[2]}, where="id = %d" % (id))
+
         query = connection.sqlrepr(update_sql)
+        print(query)
         connection.query(query)
     elif mark == "author":
         update_sql = Update('Author',
-                            values={'Author_pass': message[0], 'Author_class': message[1], 'check_state': message[2]},
-                            where='id = %d' % (id))
+                            values={'author_pass': message[0], 'author_class': message[1], 'check_state': message[2]},
+                            where="id = %d" % (id))
         query = connection.sqlrepr(update_sql)
+        print(query)
         connection.query(query)
     else:
         update_sql = Update('Reader',
                             values={'reader_pass': message[0]},
-                            where='id = %d' % (id))
+                            where="id = %d" % (id))
         query = connection.sqlrepr(update_sql)
         connection.query(query)
 

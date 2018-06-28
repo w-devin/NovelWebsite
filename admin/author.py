@@ -12,7 +12,7 @@ from flask import (
 )
 from utils.login_utils import valid_admin_login
 from utils.db_utils import Admin, Author, Reader
-from admin.db_HX import select_HX,delete_HX
+from admin.db_HX import select_HX,delete_HX,update_HX
 
 
 bp = Blueprint('author', __name__, url_prefix='/author')
@@ -72,3 +72,15 @@ def select_someauthor_author(mark):
     page=1;
     res=select_HX("some","author","author_name",page,mark)
     return jsonify({"res": res})
+
+
+@bp.route('/update',methods=['POST'])
+def bookupadte():
+    if request.method == 'POST':
+        _id = int(request.form['id'])
+        print(_id)
+
+        message = [request.form['authorpass'],request.form['authorclass'],request.form['new_check']]
+
+        update_HX("author",_id,message)
+    return "Success"

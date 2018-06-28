@@ -297,16 +297,69 @@
                             window.location.reload();
                             }
                     });
+                }
+            });
+                }
+        });
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  $('#book_update').on('click', function(){
+                var txt=$("#myupdate").val();
+                var id=Number(txt);
+                console.log(txt);
+                console.log(id);
+                $.get('select/reader/id/'+id, function(data){
+                table.innerHTML = "";
+                var res = data.res;
+                for(var i=0;i<res.length;i++){
+                  var info = JSON.parse(res[i]);
+                  console.log(info);
+                  var _this = $(this);
+                  var pass=info.readerpass;
+                  var id=info.id;
+                  var name=info.readername;
+
+                   var $tr="<tr>"+"<td>"+id+"</td>"+"<td>"+name+"</td>"
+                   +"<td>"+"<input type='text' id ='readerpass' value ='"+pass+"'></input>"+"</td>"
+                    +"<td>"+"<button type='button' class='ui button' data='" + id +"' id='sure'>确认</button>"
+                    +"<button type='button' class='ui button' id='undo'>取消</input>"
+                    +"</td>"+"</tr>"
+ ///////////////////////////////////////////////////////////////////
+                  console.log($tr);
+                  table.innerHTML += $tr;
+                  ///////////////////////////////////////////////////////////////////
+                  $("#sure").on('click',function (){
+
+                        var _this = $(this);
+                        console.log(_this);
+                        var id = _this.attr('data');
+                        console.log(id);
+
+                        var readerpass=$("#readerpass").val();
+
+                        console.log(readerpass);
 
 
-        ///////////////////////////////////////////////////////////////////
+                        var returnval = window.confirm("是否要更改该小说？","标题");
+                        if(returnval){
+                            $.post('update',{'id': id,'readerpass':readerpass}, function(data){
+
+                            });
+                            console.log(returnval);
+                            window.location.reload();
+                            }
+                    });
+
+                    $("#undo").on('click',function (){
+                    console.log("undo");
+                    window.location.reload();
+                    });
+
                 }
             });
 
-
-      ///////////////////////////////////////////////////////////////////
-                }
         });
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////
     })
