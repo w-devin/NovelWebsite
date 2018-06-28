@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}book{% endblock %}
+{% block script %}
+{% endblock %}
+{% block content %}
+    <div class="ui center aligned container">
+    <div class="ui button" id="return_index">返回主页</div>
+    <div class="ui action left icon input">
+        <i class="search icon"></i>
+        <input type="text" id="key" placeholder="查找本站图书" required/>
+        <button id="search" class="ui button">搜索</button>
+    </div>
+    </div>
+<div class="ui left aligned container">
+    <div class="ui horizontal divider">小说页面</div>
+    <div class="ui center aligned container">
+        <div class="ui segment">
+
+        </div>
+    </div>
+    <div class="doubling">
+    {% if chapters%}
+        <div class="ul list">
+        {% for chapter in chapters%}
+            <div class="ui floating message">
+                <a href="/read{{chapter[0].split('.')[0]}}">{{chapter[1]}}</a>
+            </div>
+        {% endfor%}
+        </div>
+    {%else%}
+        <div class="column">出错了</div>
+    {% endif%}
+    </div>
+    <div class="ui horizontal divider">到底了</div>
+</div>
+{% endblock %}
+
+
+
