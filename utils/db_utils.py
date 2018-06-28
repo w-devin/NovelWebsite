@@ -59,6 +59,11 @@ def update_link(link,id):
     query = connection.sqlrepr(update_sql)
     connection.query(query)
 
+def update_bookmes(id,message):
+    update_sql = Update('Book',values={'book_name':message[0],'book_description':message[1],'catalog':message[2],'current_state':message[3]},where='id=%d'%(id))
+    query = connection.sqlrepr(update_sql)
+    connection.query(query)
+
 def show_books(authorid):
     select_sql = Select(["id", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
                         where="author_id = '%d'" % (authorid))
