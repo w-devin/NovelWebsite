@@ -1,17 +1,37 @@
 {% extends 'base.html' %}
 {% block title %}login{% endblock %}
 {% block script %}
-<script>
-    $('.ui.modal')
-    .modal('show');
-</script>
 {% endblock %}
 {% block content %}
-<div class="ui modal">
-    <div class="header">标题</div>
-    <div class="content">
-        <p>Hello world</p>
-        <h1>Hello world</h1>
+<div class="ui form" id="id">
+  <br/>
+  <h4 class="ui dividing header">添加小说信息</h4>
+  <br/>
+  <div class="field">
+      <label>Book Name</label>
+      <input type="text" placeholder="Book Name" id="bookname">
+  </div>
+  <div class="ui form">
+    <div class="field">
+       <label>选择小说类型</label>
+       <select class="ui search dropdown" id="catalog">
+         <option value="">科幻灵异</option>
+         <option value="2">玄幻奇幻</option>
+         <option value="3">网游竞技</option>
+         <option value="4">武侠仙侠</option>
+         <option value="5">都市言情</option>
+         <option value="6">历史小说</option>
+         <option value="7">同人小说</option>
+         <option value="8">女生频道</option>
+       </select>
     </div>
+  </div>
+  <br/>
+  <div class="ui form">
+    <div class="field">
+      <label>小说简介</label>
+      <textarea id="bookdescription"></textarea>
+    </div>
+  </div>
 </div>
 {% endblock %}
