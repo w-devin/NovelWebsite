@@ -69,7 +69,6 @@ def show_books(authorid):
                         where="author_id = '%d'" % (authorid))
     query = connection.sqlrepr(select_sql)
     rows = connection.queryAll(query)
-    print(rows)
     return rows
 
 def author_select_book(bookid):
