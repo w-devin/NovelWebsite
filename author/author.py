@@ -6,10 +6,12 @@
 # @File: author.py
 
 from flask import Flask, render_template, request,session, url_for, redirect
-from author.auth import bp
+from author.auth import bp as auth_bp
+from author.book import bp as book_bp
 
 app = Flask(__name__)
-app.register_blueprint(bp)
+app.register_blueprint(auth_bp)
+app.register_blueprint(book_bp)
 app.secret_key = "123456"
 
 

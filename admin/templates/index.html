@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block title %}Hello from Flask{% endblock %}
 {% block script %}
@@ -7,42 +6,82 @@
 {% block content %}
  <div>
   <h3>管理员控制台</h3>
+   <span class="item">{{ admin}}</span>
+<a class="item" href="{{ url_for('auth.logout') }}">注销</a>
+
 <a href="{{ url_for('book.book') }}">小说管理</a>
 <a href="{{ url_for('author.author') }}">作者管理</a>
 <a href="{{ url_for('reader.reader') }}">读者管理</a>
-<a href="{{ url_for('check.check') }}">审核管理</a>
+
+<div class="ui form" style="float:right;">
+  <div class="inline fields">
+    <label>请选择查询类别：</label>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input name="frequency" type="radio" checked="checked" value="id">
+        <label>编号</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input name="frequency" type="radio" value="book">
+        <label>书名</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input name="frequency" type="radio" value="author">
+        <label>作者名</label>
+      </div>
+    </div>
+  </div>
+     <div class="ui input focus">
+  <input type="text" placeholder="Search..." value="" id="text">
+</div>
+  <button class="ui button" id="Mysearch">搜索</button>
+</div>
 
   </div>
+
   <hr/>
+<div class="inline fields">
+  <label>请输入要编辑的小说编号：</label>
+  <div class="ui input focus">
+  <input type="text" placeholder="Search..." value="" id="myupdate">
+</div>
+  <button class="ui button" id="book_update">更改</button>
+
+</div>
+
+
   <hr/>
   <div>小说列表</div>
   <div id="book_select_admin">
     <table class="ui celled table" style="text-align:center">
       <thead>
-        <tr><th>编号</th>
+        <tr>
+
+          <th>编号</th>
         <th>书名</th>
         <th>作者名</th>
           <th>类别</th>
         <th>状态</th>
         <th>更新时间</th>
            <th>审核</th>
+          <th></th>
       </tr></thead>
       <tbody>
 
       </tbody>
       <tfoot>
-        <tr><th colspan="7">
-          <div class="ui right floated pagination menu">
-            <a class="icon item">
-              <i class="left chevron icon"></i>
-            </a>
-            <a class="item">1</a>
-            <a class="item">2</a>
-            <a class="item">3</a>
-            <a class="item">4</a>
-            <a class="icon item">
-              <i class="right chevron icon"></i>
-            </a>
+        <tr><th colspan="9">
+          <div class="ui center aligned container">
+          <div class="ui button" id="last_page" data="1">上一页</div>
+          <div class="ui left labeled input">
+          <input type="number" placeholder="跳转到" value="1" id="page_num"/>
+          </div>
+          <div class="ui button" id="redirect_page" data="all">跳转</div>
+          <div class="ui button" id="next_page" data="1">下一页</div>
           </div>
         </th>
       </tr></tfoot>

@@ -1,0 +1,79 @@
+
+<html>
+<head>
+<title>{% block title %}{% endblock %} - Novel</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='semantic.min.css') }}">
+  <script src="{{ url_for('static', filename='jquery.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='semantic.min.js')}}"></script>
+  {% block script %}{% endblock %}
+</head>
+<body>
+  <div class="ui container">
+    <fieldset>
+        <legend>编辑区</legend>
+        <div id="id">
+                字体颜色：
+                <select onchange="setFontColor(this)">
+                    <option value="black">Black    </option>
+                    <option value="red">Red   </option>
+                    <option value="green">Green    </option>
+                    <option value="blue">Blue    </option>
+                </select>
+                字体样式：
+                <select onchange="setFontStyle(this)">
+                    <option value="bold">Bold    </option>
+                    <option value="italic">Italic   </option>
+                    <option value="underline">Underline    </option>
+                    <option value="striketthrough">StriketThrough    </option>
+                </select>
+                字体名称：
+                <select onchange="setFontFamily(this)">
+                    <option value="serif">Serif    </option>
+                    <option value="sans-serif">Sans-serif   </option>
+                    <option value="monospace">Monospace    </option>
+                    <option value="comic sans ms">Comic Sans    </option>
+                </select>
+                <input type="submit" value="保存" onclick="subText()"/>
+        </div>
+        <br/>
+        <label>章节名称</label><div align="center" id="title" contenteditable="true" style="width:100px;min-height:20px;border:2px dashed #ccc"></div>
+        <label>章节内容</label><div id="editableText" contenteditable="true" style="width:1000px;min-height:600px;border:2px dashed #ccc"></div>
+    </fieldset>
+    <script type="text/javascript">
+    methods:
+        function setFontColor(obj)
+        {
+            document.execCommand("forecolor",false,obj.value);
+        }
+        function setFontStyle(obj)
+        {
+            document.execCommand(obj.value,false,null);
+        }
+        function setFontFamily(obj)
+        {
+            document.execCommand("fontname",false,obj.value);
+        }
+        function subText()
+        {
+            var data = {
+            "text":document.getElementById('editableText').innerHTML,
+            "title":document.getElementById('title').innerHTML
+            };
+            console.log(data)
+             $.ajax({
+            url:'addChapter',
+            type:'POST',
+            data:data,
+            dataType:'json'
+            });
+        }
+    </script>
+  </div>
+</body>
+</html>
+
+

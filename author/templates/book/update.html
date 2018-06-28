@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}修改书籍{% endblock %}
+{% block script %}
+{% endblock %}
+{% block content %}
+<form action="{{ url_for('book.updatebookbyid') }}" method="post">
+    <ul>
+        <li><label>书名</label><input type="text" name="bookname" value="{{book[0]}}"></li>
+        <li><label>简介</label><input type="text" name="bookdescription" value="{{book[1]}}"></li>
+        <li><label>分类</label><input type="text" name="catalog" value="{{book[2]}}"></li>
+        <li><label>状态</label><input type="text" name="currentstate" value="{{book[3]}}"></li>
+        <li><input type="text" name="bookid" value="{{book[4]}}" hidden></li>
+        <li><input type="submit" value="修改"></li>
+    </ul>
+</form>
+{% endblock %}
+
+
+

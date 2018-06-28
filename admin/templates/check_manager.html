@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>check</title>
-</head>
-<body>
 
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Hello from Flask{% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='mybook.js')}}"></script>
+{% endblock %}
+{% block content %}
+ <div>
+  <h3>管理员控制台</h3>
+<a href="{{ url_for('book.book') }}">小说管理</a>
+<a href="{{ url_for('author.author') }}">作者管理</a>
+<a href="{{ url_for('reader.reader') }}">读者管理</a>
+
+  </div>
+  <hr/>
+  <hr/>
+  <div>小说列表</div>
+  <div id="book_select_admin">
+    <table class="ui celled table" style="text-align:center">
+      <thead>
+        <tr>
+          <th></th>
+          <th>编号</th>
+        <th>书名</th>
+        <th>作者名</th>
+          <th>类别</th>
+        <th>状态</th>
+        <th>更新时间</th>
+           <th>审核</th>
+          <th></th>
+      </tr></thead>
+      <tbody>
+
+      </tbody>
+      <tfoot>
+        <tr><th colspan="9">
+          <div class="ui center aligned container">
+          <div class="ui button" id="last_page" data="1">上一页</div>
+          <div class="ui left labeled input">
+          <input type="number" placeholder="跳转到" value="1" id="page_num"/>
+          </div>
+          <div class="ui button" id="redirect_page" data="all">跳转</div>
+          <div class="ui button" id="next_page" data="1">下一页</div>
+          </div>
+        </th>
+      </tr></tfoot>
+    </table>
+  </div>
+{% endblock %}
+
