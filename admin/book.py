@@ -97,9 +97,11 @@ def select_somebook_name(mark):
 @bp.route('/update',methods=['POST'])
 def bookupadte():
     if request.method == 'POST':
-        _id = request.form['id']
+        _id = int(request.form['id'])
         print(_id)
+
         message = [request.form['catalog'],request.form['current'],request.form['new_check']]
+
         update_HX("book",_id,message)
     return "Success"
 

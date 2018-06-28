@@ -436,7 +436,10 @@
 
                         if(new_check!="通过")
                         var new_check=0;
+                        else
+                        var new_check=1;
 
+                        console.log(new_check);
 
                         var returnval = window.confirm("是否要更改该小说？","标题");
                         if(returnval){
@@ -451,9 +454,9 @@
                     $("#undo").on('click',function (){
                     console.log("undo");
                     window.location.reload();
-                    })
+                    });
 
-                })
+                }
             });
 
         });

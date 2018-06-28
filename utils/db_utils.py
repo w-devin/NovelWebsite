@@ -71,12 +71,21 @@ def show_books(authorid):
     rows = connection.queryAll(query)
     return rows
 
-def author_select_book(bookid):
+def author_elect_book(bookid):
     select_sql = Select(["book_name", "book_description", "catalog", "current_state","id"], staticTables=['Book'],
                         where="id = '%d'" % (bookid))
     query = connection.sqlrepr(select_sql)
     rows = connection.queryAll(query)
+    print(rows)
     return rows
+
+def select_link(bookid):
+    select_sql = Select([ "link"],staticTables=['Book'],where="id = '%d'" % (bookid))
+    query = connection.sqlrepr(select_sql)
+    rows = connection.queryAll(query)
+    print(rows)
+    return rows
+
 
 
 
