@@ -6,6 +6,10 @@
     .ready(function() {
       var catagory_array = ["科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道", "全部小说"];
 
+      /* 返回主页*/
+      $('#return_index').on('click', function(){
+        window.location.href = "/";
+      });
       /*
         页面跳转
       */
@@ -46,7 +50,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read/" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -76,7 +80,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -120,7 +124,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -152,7 +156,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -197,7 +201,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -227,7 +231,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -276,7 +280,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -305,7 +309,7 @@
                 _this.find('a')[0].innerHTML = info.name;
                 _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                 _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
             })
           ;
         })
@@ -332,7 +336,7 @@
                 _this.find('a')[0].innerHTML = info.name;
                 _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                 _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
             })
           ;
         })
@@ -369,7 +373,7 @@
                         _this.find('a')[0].innerHTML = info.name;
                         _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                         _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                        _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                        _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
                     })
                   ;
                 })
@@ -399,7 +403,7 @@
                 _this.find('a')[0].innerHTML = info.name;
                 _this.find('.meta')[0].innerHTML = '作者: ' + info.author;
                 _this.find('.description')[0].innerHTML = '简介: ' + handle_des(info.description);
-                _this.find('.button')[0].innerHTML = "<a href='" + info.link + "'>点击阅读</a>";
+                _this.find('.button')[0].innerHTML = "<a href='read" + info.link + "'>点击阅读</a>";
             })
           ;
         })

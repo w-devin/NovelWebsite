@@ -6,10 +6,8 @@
 # @File: reader.py
 
 from flask import Flask, render_template, session
-from reader.auth import bp
 
 app = Flask(__name__)
-app.register_blueprint(bp)
 app.secret_key = '234567'
 
 

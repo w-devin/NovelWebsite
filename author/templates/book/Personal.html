@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}login{% endblock %}
+{% block script %}
+{% endblock %}
+{% block content %}
+<div class="ui form" id="id">
+  <br/>
+  <h4 class="ui dividing header">修改小说信息</h4>
+  <br/>
+  <form method="post" action="{{ url_for('book.updatebookbyid') }}"></form>
+  <div class="field">
+      <label>小说名称</label>
+      <input type="text" value="{{book[0]}}" id="bookname" name="bookname">
+  </div>
+  <div class="ui form">
+    <div class="field">
+       <label>小说类型</label>
+       <input type="text" value="{{book[2]}}" id="catalog" name="catalog" readonly>
+    </div>
+  </div>
+  <br/>
+  <div class="ui form">
+    <div class="field">
+      <label>小说简介</label>
+      <textarea id="bookdescription" name="bookdescription">{{book[1]}}</textarea>
+    </div>
+  </div>
+  <div class="ui form">
+    <div class="field">
+      <label>连载状态</label>
+      <input type="text" value="{{book[3]}}" id="currentstate" name="currentstate">
+    </div>
+  </div>
+  <input type="number" id="bookid" value="{{book[4]}}" name="bookid" hidden>
+  <input type="submit" class="ui primary button" onclick="editbook()"/>
+  <input type="submit" class="ui primary button" onclick="index()" align="left" value="返回"/>
+
+</div>
+
+<script type="text/javascript">
+        function editbook()
+        {
+            var data = {
+            "bookname":$('#bookname').val(),
+            "bookdescription":$('#bookdescription').val(),
+            "catalog":$('#catalog').val(),
+            "currentstate":$('#currentstate').val(),
+            "bookid":$('#bookid').val()
+            };
+            $.post(
+              '/author/book/updatebookbyid',
+              data, function(res){
+                alert('编辑成功！');
+                window.location.href = "/author";
+              }
+            );
+        }
+        function index()
+        {
+            window.location.href = "/author";
+        }
+    </script>
+{% endblock %}

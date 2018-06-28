@@ -37,14 +37,13 @@
                     <option value="monospace">Monospace    </option>
                     <option value="comic sans ms">Comic Sans    </option>
                 </select>
-                <input type="submit" value="保存" onclick="subText()"/>
+                <input type="submit" class="ui primary button" value="保存" onclick="subText()"/>
         </div>
         <br/>
         <label>章节名称</label><div align="center" id="title" contenteditable="true" style="width:100px;min-height:20px;border:2px dashed #ccc"></div>
         <label>章节内容</label><div id="editableText" contenteditable="true" style="width:1000px;min-height:600px;border:2px dashed #ccc"></div>
     </fieldset>
     <script type="text/javascript">
-    methods:
         function setFontColor(obj)
         {
             document.execCommand("forecolor",false,obj.value);
@@ -60,16 +59,17 @@
         function subText()
         {
             var data = {
+            "bookid":{{bookid}},
             "text":document.getElementById('editableText').innerHTML,
             "title":document.getElementById('title').innerHTML
             };
-            console.log(data)
-             $.ajax({
-            url:'addChapter',
-            type:'POST',
-            data:data,
-            dataType:'json'
-            });
+            $.post(
+              '/author/book/addChapter',
+              data, function(res){
+                alert('成功添加！');
+                window.location.href = "/author";
+              }
+            );
         }
     </script>
   </div>

@@ -73,12 +73,12 @@ def login():
             author = Author.selectBy(authorPass=password, authorName=username)[0]
             g.author = author
             session.clear()
-            books = show_books(author.id)
+            rows = show_books(author.id)
             session['author_id'] = author.id
             session['author_name'] = author.authorName
             session['main_book'] = show_books(author.id)
             session['number'] = len(show_books(author.id))
-            return redirect('/author')
+            return render_template('index.html',books = rows)
         flash(error)
     return render_template('auth/login.html')
 

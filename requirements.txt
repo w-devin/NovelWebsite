@@ -1,0 +1,4 @@
+flask
+sqlobject
+pymysql
+
