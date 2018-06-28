@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}login{% endblock %}
+{% block script %}
+<style type="text/css">
+
+    h2{color:#9F35FF}
+    button{background-color:color:#9F35FF}
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+    #popupcontent{
+      position:absolute;
+      visibility:hidden;
+      overflow:hidden;
+      border:1px solid #CCC;
+      background-color:#F9F9F9;
+      border:1px solid #333;
+      padding:5px;
+    }
+  </style>
+
+{% endblock %}
+{% block content %}
+<div class="ui center aligned basic segment">
+  <div class="ui horizontal divider">个人信息</div>
+ <center>
+   <br/><br/><br/><br/> <br/><br/><br/><br/> <br/><br/><br/><br/>
+<div class="ui card">
+  <div class="image">
+    <img class="image" src="{{url_for('static', filename='elliot.jpg')}}">
+  </div>
+  <div class="content">
+    <a class="header">123456789</a>
+   <div class="meta">你爸爸是王亚文</div>
+  </div>
+  <div class="extra content">
+    <div class="ui two buttons">
+      <div class="ui basic green button"><a href="#tips">修改信息</a></div>
+        <div class="ui basic red button">返回</div>
+      </div>
+  </div>
+   <div class="ui horizontal divider"> </div>
+  </div>
+ </center>
+</div>
+<a id="tips"></a>
+<div class="ui form" id="id">
+  <br/>
+  <h4 class="ui dividing header">修改个人信息</h4>
+  <br/>
+  <div class="field">
+      <label>Name</label>
+      <input type="text" placeholder="Book Name" id="bookname">
+  </div>
+
+  <br/>
+  <div class="ui form">
+    <div class="field">
+      <label>password</label>
+      <input type="text" placeholder="password">
+    </div>
+  </div>
+</div>
+<button type="submit" class="ui primary button">Save</button>
+{% endblock %}
