@@ -11,7 +11,8 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
 )
 from utils.login_utils import valid_admin_login
-from utils.db_utils import Admin, Author, Reader,select_HX,delete_HX
+from utils.db_utils import Admin, Author, Reader
+from admin.db_HX import select_HX,delete_HX
 
 
 bp = Blueprint('reader', __name__, url_prefix='/reader')

@@ -12,7 +12,7 @@ from admin.book import bp as book_bp
 from admin.author import bp as author_bp
 from admin.reader import bp as reader_bp
 from admin.check import bp as check_bp
-from utils.db_utils import select_HX
+from admin.db_HX import select_HX
 
 app = Flask(__name__)
 app.secret_key = '123456'
