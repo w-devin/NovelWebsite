@@ -12,7 +12,8 @@ from flask import (
 )
 from utils.regist_utils import valid_author_regist
 from utils.login_utils import valid_author_login
-from utils.db_utils import Admin, Author, Reader
+from utils.db_utils import Admin, Author, Reader,create_book, show_books
+
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -72,8 +73,12 @@ def login():
             author = Author.selectBy(authorPass=password, authorName=username)[0]
             g.author = author
             session.clear()
+            books = show_books(author.id)
             session['author_id'] = author.id
-            return redirect(url_for('index'))
+            session['author_name'] = author.authorName
+            session['main_book'] = show_books(author.id)
+            session['number'] = len(show_books(author.id))
+            return redirect('/author')
         flash(error)
     return render_template('auth/login.html')
 

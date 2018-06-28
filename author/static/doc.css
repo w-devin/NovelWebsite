@@ -1,0 +1,229 @@
+/*--------------
+      Grid
+---------------*/
+
+#example .highlighted.example .grid {
+  position: relative;
+}
+#example .highlighted.example .grid:before {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #FAFAFA;
+  content: '';
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  box-shadow: 0px 0px 0px 1px #DDDDDD inset;
+}
+#example .highlighted.example .relaxed.grid:before {
+  width: calc(100% - 3rem);
+  left: 1.5em;
+}
+/* Consecutive */
+#example .highlighted.example > .grid + .grid {
+  margin-top: 1rem;
+}
+
+#example .highlighted.example .grid .grid:before {
+  background-color: #F0F0F0;
+}
+#example .highlighted.example .row {
+  position: relative;
+}
+
+#example .highlighted.example .grid > .column {
+  position: relative;
+  z-index: 11;
+}
+#example .highlighted.example .grid .column:not(.row):not(.grid):after {
+  background-color: rgba(86, 61, 124, .1);
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(86, 61, 124, 0.2) inset;
+  box-shadow: 0px 0px 0px 1px rgba(86, 61, 124, 0.2) inset;
+  content: "";
+  min-height: 50px;
+}
+#example .highlighted.example .grid .column:not(.grid):first-child,
+#example .ui.type.cards .image .grid .column:not(.grid):first-child {
+  box-shadow: none;
+}
+#example .highlighted.example .grid .column:not(.grid),
+#example .ui.type.cards .image .grid .column:not(.grid) {
+  min-height: 50px;
+}
+#example .highlighted.example .grid .segment,
+#example .ui.type.cards .image .grid .segment {
+  border-radius: 0px;
+  box-shadow: 0 0 0 1px #D4D4D4;
+}
+#example .negative.example > .button {
+  position: relative;
+  z-index: 100;
+  margin: 0px 1px;
+}
+
+/* Animation */
+#example.animated .highlighted.example .html > .grid,
+#example.animated .animated.example .html > .grid,
+#example.animated .highlighted.example > .grid,
+#example.animated .animated.example > .grid {
+  margin: -1rem auto;
+  -webkit-animation: grid 7s ease infinite;
+  -moz-animation: grid 7s ease infinite;
+  animation: grid 7s ease infinite;
+}
+#example.animated .negative.example .html > .grid,
+#example.animated .negative.example > .grid {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+/* Grid Inside Grid */
+#example.animated .highlighted.example .grid .grid,
+#example.animated .animated.example .grid .grid {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+
+@-webkit-keyframes grid {
+  0% {
+    width: 100%;
+  }
+  45% {
+    width: 90%;
+  }
+  55% {
+    width: 90%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@-moz-keyframes grid {
+  0% {
+    width: 100%;
+  }
+  45% {
+    width: 90%;
+  }
+  55% {
+    width: 90%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes grid {
+  0% {
+    width: 100%;
+  }
+  45% {
+    width: 90%;
+  }
+  55% {
+    width: 90%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
+/*--------------
+     Another Grid
+---------------*/
+
+#finished .highlighted.example .grid {
+  position: relative;
+}
+#finished .highlighted.example .grid:before {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #FAFAFA;
+  content: '';
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  box-shadow: 0px 0px 0px 1px #DDDDDD inset;
+}
+#finished .highlighted.example .relaxed.grid:before {
+  width: calc(100% - 3rem);
+  left: 1.5em;
+}
+/* Consecutive */
+#finished .highlighted.example > .grid + .grid {
+  margin-top: 1rem;
+}
+
+#finished .highlighted.example .grid .grid:before {
+  background-color: #F0F0F0;
+}
+#finished .highlighted.example .row {
+  position: relative;
+}
+
+#finished .highlighted.example .grid > .column {
+  position: relative;
+  z-index: 11;
+}
+#finished .highlighted.example .grid .column:not(.row):not(.grid):after {
+  background-color: rgba(86, 61, 124, .1);
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(86, 61, 124, 0.2) inset;
+  box-shadow: 0px 0px 0px 1px rgba(86, 61, 124, 0.2) inset;
+  content: "";
+  min-height: 50px;
+}
+#finished .highlighted.example .grid .column:not(.grid):first-child,
+#finished .ui.type.cards .image .grid .column:not(.grid):first-child {
+  box-shadow: none;
+}
+#finished .highlighted.example .grid .column:not(.grid),
+#finished .ui.type.cards .image .grid .column:not(.grid) {
+  min-height: 50px;
+}
+#finished .highlighted.example .grid .segment,
+#finished .ui.type.cards .image .grid .segment {
+  border-radius: 0px;
+  box-shadow: 0 0 0 1px #D4D4D4;
+}
+#finished .negative.example > .button {
+  position: relative;
+  z-index: 100;
+  margin: 0px 1px;
+}
+
+/* Animation */
+#finished.animated .highlighted.example .html > .grid,
+#finished.animated .animated.example .html > .grid,
+#finished.animated .highlighted.example > .grid,
+#finished.animated .animated.example > .grid {
+  margin: -1rem auto;
+  -webkit-animation: grid 7s ease infinite;
+  -moz-animation: grid 7s ease infinite;
+  animation: grid 7s ease infinite;
+}
+#finished.animated .negative.example .html > .grid,
+#finished.animated .negative.example > .grid {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+/* Grid Inside Grid */
+#finished.animated .highlighted.example .grid .grid,
+#finished.animated .animated.example .grid .grid {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+
+/* Dropdown */
+.ui .dropdown{
+    z-index: 9999;
+}
+
+
+
