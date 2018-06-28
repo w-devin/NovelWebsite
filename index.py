@@ -6,7 +6,7 @@ from admin.admin import app as app_admin
 from author.author import app as app_author
 from reader.reader import app as app_reader
 
-from utils.db_utils import select_book, search_book, select_book_byclass
+from utils.db_utils import select_book, search_book
 
 
 app_home = Flask(__name__)

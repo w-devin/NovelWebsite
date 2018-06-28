@@ -35,13 +35,6 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/select/<mark>')
-def book(mark):
-    res=select_HX(mark)
-    return jsonify({"res": res})
-
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
