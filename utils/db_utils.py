@@ -43,6 +43,7 @@ author_num = Author.select().count()
 admin_num = Admin.select().count()
 reader_num = Reader.select().count()
 
+
 def select_HX(mark,page=None):
     if not page:
         page = 1;

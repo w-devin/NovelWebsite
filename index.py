@@ -1,16 +1,19 @@
 from werkzeug.wsgi import DispatcherMiddleware
 from werkzeug.serving import run_simple
 from flask import \
-    ( Flask, request, render_template, url_for, session, jsonify, redirect)
+    ( Flask, request, render_template, url_for, session, abort, jsonify, redirect)
 from admin.admin import app as app_admin
 from author.author import app as app_author
 from reader.reader import app as app_reader
-
+from auth import bp
+from book_chapter_spider import get_chapter, get_chapter_content
 from utils.db_utils import select_book, search_book, select_book_byclass
+from utils.book_utils import get_chapter_list
 
 
 app_home = Flask(__name__)
 app_home.secret_key = '123456'
+app_home.register_blueprint(bp)
 app_home.config['JSON_AS_ASCII'] = False
 
 
@@ -37,6 +40,25 @@ def book_order(catagory):
 def book_class(catagory, page):
     res = select_book_byclass(class_=catagory, page=page)
     return jsonify({"res": res})
+
+
+@app_home.route('/read/book/<book_num>/<chapter>', methods=['GET'])
+def chapter_page(book_num, chapter):
+    if request.method == 'GET':
+        url = "https://m.qu.la/book/%s/%s.html" %(book_num, chapter)
+        content = get_chapter_content(url)
+        return render_template('chapter.html', content = content)
+
+
+@app_home.route('/read/book/<book_num>/', methods=['GET'])
+def book_page(book_num):
+    if request.method == 'GET':
+        url = "https://m.qu.la/booklist/%s.html" %book_num
+        path = get_chapter(url)
+        chapters = get_chapter_list(path)
+        return render_template('book.html', chapters = chapters,  length=len(chapters)/100+1)
+
+
 
 
 @app_home.route('/search', methods=['GET'])
