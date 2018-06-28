@@ -80,34 +80,147 @@ def author_select_book(bookid):
 
 
 
-def select_HX(mark,page=None):
+def select_HX(mark,kind,search=None,page=None,st=None):
     if not page:
         page = 1;
-    if mark == "book":
-        select_sql= Select(["id","book_name","author","catalog","current_state","recent_update_time","check_state"],staticTables=['Book'],
-                           orderBy="heat", limit=12)
-        query = connection.sqlrepr(select_sql)
-        rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
-        print(rows)
-        return [json.dumps({'id': r[0], 'bookname':r[1],'author': r[2],'catalog':r[3], 'current_state': r[4],
-                            'recent_update_time': r[5], 'check': r[6]})
-                for r in rows]
+    if mark == "all":
+        if kind == "book":
+            select_sql= Select(["id","book_name","author","catalog","current_state","recent_update_time","check_state"],staticTables=['Book']
+                               ,limit=24*page)
+            query = connection.sqlrepr(select_sql)
+            print(query)
+            rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+            return [json.dumps({'id': r[0], 'bookname':r[1],'author': r[2],'catalog':r[3], 'current_state': r[4],
+                                'recent_update_time': r[5], 'check': r[6]})
+                    for r in rows]
+        elif kind == "author":
+            select_sql = Select(
+                ["id", "author_name", "author_pass", "description", "author_class","nick_name", "check_state"],
+                staticTables=['Author']
+                , limit=12 * page)
+            query = connection.sqlrepr(select_sql)
+            print(query)
+            rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+            return [json.dumps({'id': r[0], 'authorname': r[1], 'authorpass': r[2], 'description': r[3], 'author_class': r[4],
+                                'nick_name': r[5], 'check': r[6]})
+                    for r in rows]
+        elif kind == "reader":
+            select_sql = Select(
+                ["id", "reader_name", "reader_pass"],
+                staticTables=['Reader']
+                , limit=12 * page)
+            query = connection.sqlrepr(select_sql)
+            print(query)
+            rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+            return [json.dumps(
+                {'id': r[0], 'reader_name': r[1], 'reader_pass': r[2]})
+                    for r in rows]
+    else:
+        if kind =="book":
+            if search == "id":
+                select_sql = Select(
+                    ["id", "book_name", "author", "catalog", "current_state", "recent_update_time", "check_state"],
+                    staticTables=['Book']
+                    ,where="id = '%d'" % (st))
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [json.dumps({'id': r[0], 'bookname': r[1], 'author': r[2], 'catalog': r[3], 'current_state': r[4],
+                                    'recent_update_time': r[5], 'check': r[6]})
+                        for r in rows]
+            elif search == "book":
+                select_sql = Select(
+                    ["id", "book_name", "author", "catalog", "current_state", "recent_update_time", "check_state"],
+                    staticTables=['Book']
+                    , where="book_name like '%s%s%s'" % ('%',st,'%'))
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [
+                    json.dumps({'id': r[0], 'bookname': r[1], 'author': r[2], 'catalog': r[3], 'current_state': r[4],
+                                'recent_update_time': r[5], 'check': r[6]})
+                    for r in rows]
+            elif search == "author":
+                select_sql = Select(
+                    ["id", "book_name", "author", "catalog", "current_state", "recent_update_time", "check_state"],
+                    staticTables=['Book']
+                    , where="author like '%s%s%s'" % ('%',st,'%'))
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [
+                    json.dumps({'id': r[0], 'bookname': r[1], 'author': r[2], 'catalog': r[3], 'current_state': r[4],
+                                'recent_update_time': r[5], 'check': r[6]})
+                    for r in rows]
+        elif kind =="author":
+            if search == "id":
+                select_sql = Select(
+                    ["id", "author_name", "author_pass", "description", "author_class", "nick_name", "check_state"],
+                    staticTables=['Author'],where="id = '%d'" % (st)
+                    , limit=12 * page)
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [json.dumps(
+                    {'id': r[0], 'authorname': r[1], 'authorpass': r[2], 'description': r[3], 'author_class': r[4],
+                     'nick_name': r[5], 'check': r[6]})
+                        for r in rows]
+            elif search == "author_name":
+                select_sql = Select(
+                    ["id", "author_name", "author_pass", "description", "author_class", "nick_name", "check_state"],
+                    staticTables=['Author'], where="author_name like '%s%s%s'" % ('%',st,'%')
+                    , limit=12 * page)
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [json.dumps(
+                    {'id': r[0], 'authorname': r[1], 'authorpass': r[2], 'description': r[3], 'author_class': r[4],
+                     'nick_name': r[5], 'check': r[6]})
+                    for r in rows]
+        elif kind == "reader":
+            if search == "id":
+                select_sql = Select(
+                    ["id", "reader_name", "reader_pass"],
+                    staticTables=['Reader'], where="id = '%d'" % (st)
+                    , limit=12 * page)
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [json.dumps(
+                    {'id': r[0], 'readername': r[1], 'readerpass': r[2]})
+                    for r in rows]
+            elif search == "name":
+                select_sql = Select(
+                    ["id", "reader_name", "reader_pass"],
+                    staticTables=['Reader'], where="reader_name like '%s%s%s'" % ('%',st,'%')
+                    , limit=12 * page)
+                query = connection.sqlrepr(select_sql)
+                print(query)
+                rows = connection.queryAll(query)[(page - 1) * 12: page * 12]
+
+                return [json.dumps(
+                    {'id': r[0], 'readername': r[1], 'readerpass': r[2]})
+                    for r in rows]
 
 
-def select_book_byclass(class_, page=None):
-    if page is None:
-        page = 1
-    if class_ in list(range(9)):
-        if class_ != 8:
-            catalog = ["科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道"]
-            select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
-                            where="catalog = '%s'" % (catalog[class_]), orderBy="heat", limit=12, start=(page-1)*12)
-        else:
-            select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'], orderBy="heat")
-        query = connection.sqlrepr(select_sql)
-        rows = connection.queryAll(query)
-    return [{'name': r[1], 'author': r[0], 'description': r[2], 'link': r[3], 'cover': r[4]}
-        for r in rows]
+
+
+
+
+
+def delete_HX(mark,id=None):
+        Book.delete(id)
+
+
 
 
 def select_book(mark, catagory=None , page=None):
@@ -117,9 +230,9 @@ def select_book(mark, catagory=None , page=None):
         return [json.dumps({'name': b.bookName, 'author': b.author, 'description': b.bookDescription, 'link': b.link, 'cover': b.cover}) for b in Book.select(orderBy='heat')[(page-1)*12: page*12]]
     elif mark == "finished":
         select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
-                            where="current_state = '%s'" % ('完成'), orderBy="heat", limit=12, start=(page-1)*12)
+                            where="current_state = '%s'" % ('完成'), orderBy="heat", )
         query = connection.sqlrepr(select_sql)
-        rows = connection.queryAll(query)
+        rows = connection.queryAll(query)[(page-1)*12: page*12]
         return [json.dumps({'name': r[1], 'author': r[0], 'description': r[2], 'link': r[3], 'cover': r[4]})
                 for r in rows]
     else:
@@ -127,13 +240,12 @@ def select_book(mark, catagory=None , page=None):
             if catagory in list(range(1, 9)):
                 catalog = ["科幻灵异", "玄幻奇幻", "网游竞技", "武侠仙侠", "都市言情", "历史军事", "同人小说", "女生频道"]
                 select_sql = Select(["author", "book_name", "book_description", "link", "cover"], staticTables=['Book'],
-                                    where="catalog = '%s'" % (catalog[catagory]), orderBy="heat", limit=12, start=(page-1)*12)
+                                    where="catalog = '%s'" % (catalog[catagory]), orderBy="heat")
                 query = connection.sqlrepr(select_sql)
-                rows = connection.queryAll(query)
+                print(query)
+                rows = connection.queryAll(query)[(page-1)*12: page*12]
                 return [json.dumps({'name': r[1], 'author': r[0], 'description': r[2], 'link': r[3], 'cover': r[4]})
                         for r in rows]
-            return None
-        return None
 
 
 def search_book(keyword):

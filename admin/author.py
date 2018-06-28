@@ -8,10 +8,10 @@
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
 )
 from utils.login_utils import valid_admin_login
-from utils.db_utils import Admin, Author, Reader
+from utils.db_utils import Admin, Author, Reader,select_HX,delete_HX
 
 
 bp = Blueprint('author', __name__, url_prefix='/author')
@@ -41,3 +41,33 @@ def author():
     return render_template('author_manager.html')
 
 
+@bp.route('/author/select/author/<int:page>',methods=['GET'])
+def select_author(page):
+    print(page)
+    res=select_HX("all","author",page=page)
+    return jsonify({"res": res})
+
+
+@bp.route('/delete',methods=['GET','POST'])
+def delete_author():
+    if request.method == 'POST':
+        _id=request.form['id']
+        print(_id)
+        delete_HX("author",_id)
+    return "Success"
+
+
+@bp.route('/select/author/id/<int:id>',methods=['GET'])
+def select_someid_author(id):
+    print(id)
+    page=1;
+    res=select_HX("some","author","id",page,id)
+    return jsonify({"res": res})
+
+
+@bp.route('/select/author/author/<mark>',methods=['GET'])
+def select_someauthor_author(mark):
+    print(mark)
+    page=1;
+    res=select_HX("some","author","author_name",page,mark)
+    return jsonify({"res": res})
