@@ -22,6 +22,8 @@ def index():
         return redirect(url_for('auth.login'))
     if request.method == 'GET':
         rows = show_books(session.get('author_id'))
+        session['main_book'] = rows
+        session['number'] = len(rows)
         return render_template('index.html',books = rows)
 
 
