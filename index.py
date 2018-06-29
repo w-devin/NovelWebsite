@@ -9,6 +9,7 @@ from auth import bp
 from book_chapter_spider import get_chapter, get_chapter_content
 from utils.db_utils import select_book, search_book, select_book_byclass
 from utils.book_utils import get_chapter_list
+from utils.db_utils import Book
 
 
 app_home = Flask(__name__)
@@ -46,17 +47,18 @@ def book_class(catagory, page):
 def chapter_page(book_num, chapter):
     if request.method == 'GET':
         url = "https://m.qu.la/book/%s/%s.html" %(book_num, chapter)
-        content = get_chapter_content(url)
-        return render_template('chapter.html', content = content)
+        content, title = get_chapter_content(url)
+        return render_template('chapter.html', last="/read/book/%s/%d" % (book_num, int(chapter)-1), return_="/read/book/%s" % book_num, next="/read/book/%s/%d" % (book_num, int(chapter)+1), content=content, title = title)
 
 
 @app_home.route('/read/book/<book_num>/', methods=['GET'])
 def book_page(book_num):
     if request.method == 'GET':
         url = "https://m.qu.la/booklist/%s.html" %book_num
+        book = Book.selectBy(link='/book/%s/' %book_num)[0]
         path = get_chapter(url)
         chapters = get_chapter_list(path)
-        return render_template('book.html', chapters = chapters,  length=len(chapters)/100+1)
+        return render_template('book.html', chapters = chapters,  book=book)
 
 
 

@@ -9,6 +9,7 @@ import requests
 import os
 from bs4 import BeautifulSoup
 
+
 def get_chapter_list(book_path):
     print(book_path)
     with open(book_path, 'r', encoding='utf8') as f:
